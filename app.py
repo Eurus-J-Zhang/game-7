@@ -46,24 +46,16 @@ def handle_form():
     if request.method == 'POST':
         slot_choice = request.form.get('slotChoice')
         session['final_choice'] = slot_choice
-        if slot_choice == 'B':
-            return redirect(url_for('correct'))  # Redirect to the correct page
-        elif slot_choice in ('A', 'C'):
+        if slot_choice in ('A', 'B','C'):
             return redirect(url_for('wrong')) # Redirect to the wrong page
         else:
-            return render_template('p4.html', error='Please select an option.') 
+            return render_template('lock_choice.html', error='Please select an option.') 
     return render_template('lock_choice.html')
 
 
 @app.route('/emo', methods=['GET', 'POST'])
 def emo():
-    final_choice = session.get('final_choice', None)
-    content = {
-    'B': {'image_path': 'static/img/ring.jpg'},
-    'A_C': {'image_path': 'static/img/alarm.jpg'}
-    }
-    chosen_content = content['B'] if final_choice == 'B' else content['A_C']
-    
+    final_choice = session.get('final_choice', None)  
     form = EmotionForm()
 
     result = handle_form_submission(form, 'emo_data', 'end')
@@ -76,7 +68,7 @@ def emo():
         db.session.add(data)
         db.session.commit()
         return result
-    return render_template('emo.html',form=form,chosen_content=chosen_content)
+    return render_template('emo.html',form=form)
 
 
 # P1
