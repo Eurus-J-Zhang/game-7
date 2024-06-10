@@ -64,7 +64,7 @@ form {
 
 .feedback-input {
     height: 180px;
-    width: 80%;
+    width: 100%;
     font-size: 18px;
     padding-top: 5px;
     padding-left: 3px;
@@ -120,4 +120,7 @@ form {
     text-decoration: none;
     cursor: pointer;
   }
-  
+
+  .spaced-label {
+    margin-right: 60px; /* Adjust the value as needed */
+  }
